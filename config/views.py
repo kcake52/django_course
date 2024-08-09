@@ -4,16 +4,21 @@ from django.shortcuts import render
 import random
 
 # views.py
+
+
 def hello_world(request):
     return HttpResponse("<h1>Hello, World!</h1>")
 
-def hello_world_json(request):
-    return JsonResponse({"message" : "Hello, World!"})
 
-class RandomNumberTemplateView(TemplateView) :
+def hello_world_json(request):
+    return JsonResponse({"message": "Hello, World!"})
+
+
+class RandomNumberTemplateView(TemplateView):
     template_name = "random.html"
 
-class RandomNumberView(View) :
+
+class RandomNumberView(View):
     def get(self, request):
-        random_number = random.randint(1,100)
-        return render(request, "random.html", {"random" : random_number})
+        random_number = random.randint(1, 100)
+        return render(request, "random.html", {"random": random_number})
