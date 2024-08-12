@@ -74,3 +74,20 @@ class TodoGenericsListAPI(generics.ListAPIView) :
 class TodoGenericsListCreateAPI(generics.ListCreateAPIView) : 
     queryset = Todo.objects.all()
     serializer_class = TodoSerializer
+
+class TodoGenericsRetrieveAPI(generics.RetrieveAPIView) : 
+    queryset = Todo.objects.all()
+    # 전체를 받지만 pk를 넘겨 원하는 객체 하나만 받을 수 있다.
+    serializer_class = TodoSerializer
+    
+class TodoGenericsUpdateAPI(generics.UpdateAPIView) : 
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
+    
+class TodoGenericsDeleteAPI(generics.DestroyAPIView) : 
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
+    
+class TodoGenericsRetrieveUpdateDeleteAPI(generics.RetrieveUpdateDestroyAPIView) : 
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
