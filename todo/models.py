@@ -1,6 +1,6 @@
 from django.db import models
 
-class Todo(models.Model) :
+class Todo(models.Model) : # pk, id 등 models.Model 안에 존재
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     done = models.BooleanField(default=False)
