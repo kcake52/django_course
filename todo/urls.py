@@ -1,9 +1,14 @@
-from django.urls import path
+from django.urls import path, include
 from .apis import *
 from .views import *
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register("", TodoViewSet)
 
 # 127.0.0.1:8000/todo/
 urlpatterns = [
+    path("viewsets/", include(router.urls)),
     path("generics/", TodoGenericsListCreateAPI.as_view()),
     path("generics/<int:pk>/", TodoGenericsRetrieveUpdateDeleteAPI.as_view()),
     path("generics/create/", TodoGenericsCreateAPI.as_view()),
@@ -17,8 +22,6 @@ urlpatterns = [
     path("update/<int:pk>/", TodoUpdateAPI.as_view()),
     path("delete/<int:pk>/", TodoDeleteAPI.as_view()),
     path("list/", todo_list),  # 127.0.0.1:8000/todo/list
-    # 127.0.0.1:8000/todo/<int:pk> / pk = 135 135번 todo를 찾아서 리턴
-    path("<int:pk>/", todo_detail),
-    # 127.0.0.1:8000/todo/<str:name> / name = 공부 todo를 찾아서 리턴
-    path("<str:name>/", todo_detail_name),
+    path("<int:pk>/", todo_detail), # 127.0.0.1:8000/todo/<int:pk> / pk = 135 135번 todo를 찾아서 리턴
+    path("<str:name>/", todo_detail_name), # 127.0.0.1:8000/todo/<str:name> / name = 공부 todo를 찾아서 리턴
 ]
