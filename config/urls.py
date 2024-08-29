@@ -21,6 +21,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", views.hello_world),
+    path("api/todo/", include("todo.api_urls")),
     path("json/", views.hello_world_json),
     path("todo/", include("todo.urls")),
     path("random/template", views.RandomNumberTemplateView.as_view()),

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <h1>Todo Create</h1>
+
+  <div class="container">
+    <h2>Create a New Todo</h2>
+
+    <div>
+      <label for="name">Name :
+      </label>
+      <input type="text" name="name" id="name"/>
+    </div>
+    <div>
+      <label for="description">Description :
+      </label>
+      <textarea name="description" id="description"/></textarea>
+  </div>
+  <div>
+    <label for="complete">Complete :
+    </label>
+    <input type="checkbox" name="complete" id="complete"/>
+  </div>
+  <div>
+    <label for="exp">Experience Points :
+    </label>
+    <input type="number" name="exp" id="exp"/>
+  </div>
+  <button type="submit" id="todoCreate">Create</button>
+
+</div>
+
+{% comment %} axios 사용한 todoCreate {% endcomment %}
+{% comment %} <script>
+  // 버튼이 클릭된다면 (Vanila JS)
+  document
+    .querySelector("#todoCreate")
+    .addEventListener("click", function () {
+      axiosInstance.post("/api/todo/create/", {name: "test Todo in axios"})
+    
+      // 성공했으면?
+      .then(function (response) {
+        console.log(response)
+      })
+      // 실패했다면?
+      .catch(function (error) {
+        console.log(error)
+      })
+    })
+</script> {% endcomment %}
+
+{% comment %} Jquery 사용한 todoCreate {% endcomment %}
+<script>
+  $("#todoCreate").on("click", function() {
+    console.log("🚀 ~ $ ~ val():", $("#complete").val())
+    axiosInstance.post("/api/todo/create/", {
+      name: $("#name").val(),
+      description: $("#description").val(),
+      complete: $("#complete").val() === "on",
+      exp: $("#exp").val(),
+    })
+
+    // 성공했으면?
+    .then(function (response) {
+      window.location.href="todo/list/"
+    })
+    // 실패했다면?
+    .catch(function (error) {
+      console.log(error)
+      alert("Todo 생성에 실패했습니다.")
+    })
+  })
+</script>
+{% endblock %}

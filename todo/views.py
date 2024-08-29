@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Todo
+from django.views import View
+
 
 
 def todo_list(request):
@@ -32,3 +34,7 @@ def todo_detail_name(request, name):
     if (todo is None):
         return HttpResponse("없는 페이지입니다.", status=404)
     return render(request, "todo/todo.html", {"todo": todo, "first": first, "last": last})
+
+class TodoCreateView(View) :
+    def get(self, request) : 
+        return render(request, "todo/create.html")
